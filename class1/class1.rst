@@ -1,20 +1,21 @@
-F5 tcpdump and Wireshark
-========================
+NGINX programmability
+=====================
 
-This class covers the following topics:
+This class will introduce NGINX programmability.  
 
-- tcpdump switches and filters
-- F5 specific tcpdump commands
-- F5 Wireshark Plugin
-- Using the F5 Wireshark Plugin
-- SSL decrypt packet capture
+This class will cover the following topics
+
+- Implementing NJS
+- 
 
 We will be using a jumpbox to connect to the lab environment.  Click on the lab link given out during class and select the RDP option to connect to the lab box.
 
-The credentials will be the following:
+Expected time to complete: **1 hour**
 
-user: f5student
-password: f5DEMOs4u
+
+We will be using a jumpbox to connect to the lab environment.  Click on the lab link given out during class and select the RDP option to connect to the lab box.
+
+
 
 .. toctree::
    :maxdepth: 1

@@ -1,7 +1,7 @@
-Troubleshoot with tcpdump and Wireshark
-=======================================
+NGINX programmability
+==================================================================
 
-Welcome to the troubleshoot with tcpdump and Wireshark documentation.
+Welcome to the NGINX programmability course documentation.
 
 .. toctree::
    :maxdepth: 2
