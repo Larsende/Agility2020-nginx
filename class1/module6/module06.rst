@@ -13,6 +13,7 @@ nginx.conf:
 .. code-block:: nginx
 
   ...
+  
   http {
         js_include example.js;
   
