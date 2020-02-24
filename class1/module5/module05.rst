@@ -2,6 +2,13 @@ Lab 5 - Secure hash
 ================
 Protecting ``/secure/`` location from simple bots and web crawlers.
 
+Running inside Docker:
+
+.. code-block:: shell
+
+  EXAMPLE=secure_link_hash
+  docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
+
 nginx.conf:
 
 .. code-block:: nginx
@@ -62,4 +69,4 @@ Checking:
   curl http://127.0.0.1/secure/r --cookie cookie.txt
   PASSED
 
-
+  docker stop njs_example

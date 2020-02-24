@@ -9,12 +9,6 @@ Running inside Docker:
   EXAMPLE=hello
   docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
 
-  # Stopping.
-  docker stop njs_example
-
-Hello world
-===========
-
 nginx.conf:
 
 .. code-block:: nginx
@@ -61,4 +55,6 @@ Checking:
   curl http://localhost/version
   0.2.4
 
+  # Stopping.
+  docker stop njs_example
 

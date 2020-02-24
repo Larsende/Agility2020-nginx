@@ -1,6 +1,41 @@
 Lab 6 - File IO
 ================
 
+Running inside Docker:
+
+.. code-block:: shell
+
+  EXAMPLE=file_io
+  docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
+
+nginx.conf:
+
+.. code-block:: nginx
+
+  ...
+  http {
+        js_include example.js;
+  
+        server {
+              listen 80;
+  
+              location /version {
+                  js_content version;
+              }
+  
+              location /push {
+                  js_content push;
+              }
+  
+              location /flush {
+                  js_content flush;
+              }
+  
+              location /read {
+                  js_content read;
+              }
+        }
+  }
 example.js:
 
 .. code-block:: js
@@ -51,4 +86,4 @@ example.js:
   curl http://localhost/read
   200 <empty reply>
 
-
+  docker stop njs_example
