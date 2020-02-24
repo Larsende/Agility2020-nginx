@@ -44,9 +44,9 @@ Checking:
 .. code-block:: shell
 
   curl -G http://localhost/foo --data-urlencode "foo=привет"
-  %D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82
+  Hello%20G%C3%BCnter
 
-  curl -G http://localhost/dec_foo --data-urlencode "foo=привет"
-  привет
+  curl -G http://localhost/dec_foo --data-urlencode "foo=Hello Günter"
+  Hello Günter
 
   docker stop njs_example
