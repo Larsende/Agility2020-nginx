@@ -1,54 +1,98 @@
-Lab 7 - File IO
-================
+Lab 7 - Complex redirects using njs file map.
+========================================
+
+nginx.conf:
+
+.. code-block:: nginx
+
+  ...
+
+  http {
+      js_include example.js;
+
+      upstream backend {
+        server 127.0.0.1:8080;
+      }
+
+      server {
+            listen 80;
+
+            location = /version {
+                js_content version;
+            }
+
+            # PROXY
+
+            location / {
+                auth_request /resolv;
+                auth_request_set $route $sent_http_route;
+
+                proxy_pass http://backend$route$is_args$args;
+            }
+
+            location = /resolv {
+                internal;
+
+                js_content resolv;
+            }
+      }
+
+      ...
+  }
 
 example.js:
 
 .. code-block:: js
 
-  var fs = require('fs');
-  var STORAGE = "/tmp/njs_storage"
+    ...
 
-  function push(r) {
-          fs.appendFileSync(STORAGE, r.requestBody);
-          r.return(200);
-  }
+    function resolv(r) {
+        try {
+            var map = open_db();
+            var uri = r.variables.request_uri.split("?")[0];
+            var mapped_uri = map[uri];
 
-  function flush(r) {
-          fs.writeFileSync(STORAGE, "");
-          r.return(200);
-  }
+            r.headersOut['Route'] = mapped_uri ? mapped_uri : uri;
+            r.return(200);
 
-  function read(r) {
-          var data = "";
-          try {
-              data = fs.readFileSync(STORAGE);
-          } catch (e) {
-          }
+        } catch (e) {
+            r.return(500, "resolv: " + e);
+        }
+    }
+    ...
 
-          r.return(200, data);
-  }
+Checking:
 
 .. code-block:: shell
 
-  curl http://localhost/read
-  200 <empty reply>
+  curl http://localhost/CCC?a=1
+  200 /CCC?a=1
 
-  curl http://localhost/push -X POST --data 'AAA'
+  curl http://localhost:8090/map
+  200 {}
+
+  curl http://localhost:8090/add -X POST --data '{"from": "/CCC", "to": "/AA"}'
   200
 
-  curl http://localhost/push -X POST --data 'BBB'
+  curl http://localhost:8090/add -X POST --data '{"from": "/BBB", "to": "/DD"}'
   200
 
-  curl http://localhost/push -X POST --data 'CCC'
+  curl http://localhost/CCC?a=1
+  200 /AA?a=1
+
+  curl http://localhost/BB?a=1
+  200 /BB?a=1
+
+  curl http://localhost:8090/map
+  200 {"/CCC":"/AA","/BBB":"/DD"}
+
+  curl http://localhost:8090/remove -X POST --data '{"from": "/CCC"}'
   200
 
-  curl http://localhost/read
-  200 AAABBBCCC
+  curl http://localhost:8090/map
+  200 {"/BBB":"/DD"}
 
-  curl http://localhost/flush -X POST
-  200
-
-  curl http://localhost/read
-  200 <empty reply>
+  curl http://localhost/CCC?a=1
+  200 /CCC?a=1
 
 
