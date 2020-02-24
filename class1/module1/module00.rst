@@ -34,7 +34,7 @@ Starting the Lab
 
 *Insert instructions here to access UDF*
 
-Command line
+Using NGINX with Docker
 ============
 
 .. code-block:: shell
@@ -54,13 +54,14 @@ Command line
   'Hello world'
   undefined
 
-Running inside Docker
+Local Setup for Labs
 =====================
 
 .. code-block:: shell
 
   git clone https://github.com/xeioex/njs-examples
   cd njs-examples
+  
   EXAMPLE=hello
   docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
 
