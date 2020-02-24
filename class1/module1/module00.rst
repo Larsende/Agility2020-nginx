@@ -39,7 +39,7 @@ Command line
 
 .. code-block:: shell
 
-  docker run -i -t nginx:latest /usr/bin/njs
+  docker run -i -t nginx /usr/bin/njs
 
 .. code-block:: none
 
@@ -53,4 +53,18 @@ Command line
   >> hi("Hello world")
   'Hello world'
   undefined
+
+Running inside Docker
+=====================
+
+.. code-block:: shell
+
+  git clone https://github.com/xeioex/njs-examples
+  cd njs-examples
+  EXAMPLE=hello
+  docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
+
+  # Stopping.
+  docker stop njs_example
+
 

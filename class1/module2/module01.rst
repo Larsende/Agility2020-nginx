@@ -1,8 +1,5 @@
-Lab 1 - Implementing NJS on NGINX+
-==================================
-
-Decode URI
-===========
+Lab 2 - Decode URI
+==================
 
 nginx.conf:
 
