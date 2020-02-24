@@ -102,4 +102,5 @@ Checking:
   curl http://localhost/CCC?a=1
   200 /CCC?a=1
 
-  docker stop njs_examples
+  docker stop njs_example
+
