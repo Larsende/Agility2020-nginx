@@ -1,6 +1,13 @@
 Lab 2 - Decode URI
 ==================
 
+Running inside Docker:
+
+.. code-block:: shell
+
+  EXAMPLE=decode_uri
+  docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
+
 nginx.conf:
 
 .. code-block:: nginx
@@ -37,9 +44,9 @@ Checking:
 .. code-block:: shell
 
   curl -G http://localhost/foo --data-urlencode "foo=привет"
-  %D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82
+  Hello%20G%C3%BCnter
 
-  curl -G http://localhost/dec_foo --data-urlencode "foo=привет"
-  привет
+  curl -G http://localhost/dec_foo --data-urlencode "foo=Hello Günter"
+  Hello Günter
 
-
+  docker stop njs_example

@@ -1,6 +1,13 @@
 Lab 7 - Complex redirects using njs file map.
 ========================================
 
+Running inside Docker:
+
+.. code-block:: shell
+
+  EXAMPLE=complex_redirects
+  docker run --rm --name njs_example  -v $(pwd)/conf/$EXAMPLE.conf:/etc/nginx/nginx.conf:ro  -v $(pwd)/njs/$EXAMPLE.js:/etc/nginx/example.js:ro -p 80:80 -p 8090:8090 -d nginx
+
 nginx.conf:
 
 .. code-block:: nginx
@@ -95,4 +102,5 @@ Checking:
   curl http://localhost/CCC?a=1
   200 /CCC?a=1
 
+  docker stop njs_example
 
