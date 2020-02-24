@@ -251,6 +251,7 @@ htmlhelp_basename =  cleanname + 'doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
+latex_engine = 'xelatex'
 front_cover_image = 'front_cover'
 back_cover_image = 'back_cover'
 
