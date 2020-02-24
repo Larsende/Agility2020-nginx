@@ -1,4 +1,4 @@
-NGINX programmability
+NGINX JavaScript Programmability
 ==================================================================
 
 Welcome to the NGINX programmability course documentation.
